@@ -1,0 +1,250 @@
+body {
+    font-family: system-ui, sans-serif;
+    margin: 20px;
+    -webkit-font-smoothing: antialiased;
+    background: linear-gradient(45deg, #00bdff, #00ffeb, #03ff74, #6cff8c, #00ffae);
+    transition: ease-in 5s;
+    animation-name: enter;
+    animation-duration: 1s;
+}
+
+@keyframes enter {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 3;
+    }
+}
+
+.button {
+    background: none;
+    border: none;
+    float: left;
+    margin-right: 13px;
+    font-size: 17px;
+    width: max-content;
+    padding-right: 76px;
+    padding-bottom: 7px;
+    padding-left: 30px;
+    padding-top: 4px;
+}
+
+#navigation {
+    margin-top: -60px;
+    margin-left: 939px;
+    margin-bottom: 190px;
+    scale: 85%;
+}
+
+#saying {
+    color: #ffffff;
+    margin-left: 464px;
+    margin-top: 36px;
+    font-size: 50px;
+}
+
+#details {
+    color: #ffffff;
+    text-align: center;
+    margin-top: -16px;
+    width: 762px;
+    margin-left: 277px;
+}
+
+.start {
+    background: #025e23;
+    border: none;
+    font-size: 19px;
+    color: white;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    padding-right: 83px;
+    border-radius: 7px;
+    padding-left: 97px;
+    margin-left: 538px;
+    margin-top: 21px;
+    margin-bottom: 50px;
+    background: #076284;
+}
+
+#bottom {
+    margin-left: 425px;
+    margin-top: 82px;
+    margin-bottom: 60px;
+    color: black;
+    align-items: center;
+    align-content: center;
+    padding-left: 2cm;
+}
+
+#copyright {
+    margin-top: 176px;
+    margin-left: 64px;
+    text-align: center;
+    color: white;
+}
+
+.button {
+    width: max-content;
+    padding-right: 15px;
+    padding-bottom: 7px;
+    padding-left: 19px;
+    padding-top: 7px;
+    border-radius: 40px;
+    background: none;
+}
+
+/*Hover Control*/
+.start:hover {
+    transform: scale(106%);
+    transition: ease-in 0.2s;
+    background: #0093ff;
+}
+
+/*body:hover {
+    background: linear-gradient(45deg, #00bdff, #00ffbb, #00ff72, #61ff83, #00ffae);
+    transition: cubic-bezier(0.45, 0.05, 0.55, 0.95) 3s;
+}*/
+.other:hover {
+    transform: scale(103%);
+    transition: ease-in 0.1s;
+    background: #78ff0000;
+    border-bottom-color: white;
+    text-decoration-color: #002d4e;
+    border-top: hidden;
+    border-right: hidden;
+    border-left: hidden;
+    border-radius: 0px;
+    border-width: thick;
+    color: #002d4e;
+}
+
+.thisPage:hover {
+    transform: scale(103%);
+    transition: ease-in 0.1s;
+}
+
+/*special*/
+button.thisPage {
+    background: #78ff0000;
+    border-bottom-color: #ffffff;
+    text-decoration-color: #002d4e;
+    border-style: solid;
+    border-top: hidden;
+    border-right: hidden;
+    border-left: hidden;
+    border-radius: 0px;
+    border-width: thick;
+    color: #ffffff;
+}
+
+.feed:hover {
+    transform: scale(103%);
+    transition: ease-in 0.1s;
+    background: #78ff0000;
+    border-bottom-color: #002d4e;
+    text-decoration-color: #002d4e;
+    border-style: groove;
+    border-top: hidden;
+    border-right: hidden;
+    border-left: hidden;
+    border-radius: 0px;
+    border-width: thick;
+    color: #002d4e;
+}
+
+start:active {
+    background: #4100f3;
+}
+
+body {
+    font-family: system-ui, sans-serif;
+    margin: 20px;
+    -webkit-font-smoothing: antialiased;
+    background: linear-gradient(45deg, #00bdff, #00ffeb, #03ff74, #6cff8c, #00ffae);
+    transition: ease-in 5s;
+    background-image: url(../IMAGES/Brush.jfif);
+}
+
+div#overlay {
+    background: #00447594;
+    width: 1349px;
+    position: absolute;
+    height: 782px;
+    left: 0px;
+    top: 0px;
+    backdrop-filter: brightness(0.5);
+    animation-name: overlayfade;
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    transition: ease-in-out;
+}
+
+@keyframes overlayfade {
+    14% {
+        background: #003c7569;
+    }
+
+    28% {
+        background: #1197af69;
+    }
+
+    42% {
+        background: #0766be69;
+    }
+
+    56% {
+        background: #096daf69;
+    }
+
+    70% {
+        background: #003e7569;
+    }
+
+    84% {
+        background: #00647569;
+    }
+
+    100% {
+        background: #005e7569;
+    }
+}
+
+#spur {
+    position: absolute;
+}
+
+.feed:hover {
+    transform: scale(103%);
+    transition: ease-in 0.1s;
+    background: #78ff0000;
+    border-bottom-color: white;
+    text-decoration-color: #002d4e;
+    border-style: solid;
+    border-top: hidden;
+    border-right: hidden;
+    border-left: hidden;
+    border-radius: 0px;
+    border-width: thick;
+    color: white;
+}
+
+div#main {
+    margin-top: 200px;
+}
+
+div#top {
+    margin-top: -24px;
+}
+
+div#overlay {
+    background: #005e7569;
+    width: 1351px;
+    position: absolute;
+    height: 880px;
+    left: 0px;
+    top: 0px;
+}

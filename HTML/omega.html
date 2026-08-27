@@ -1,0 +1,363 @@
+Here is a complete HTML5 page featuring a modern dark theme inspired by your image, complete with an interactive **Student / Teacher** role slider that dynamically adapts the card's accent colors and welcome subtitle.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In - Console</title>
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --input-bg: #0f172a;
+      --input-border: #334155;
+      --accent-color: #3b82f6; /* Default Blue for Student */
+      --accent-hover: #2563eb;
+      --button-text: #ffffff;
+    }
+
+    /* Teacher Mode Color Palette Overrides */
+    body.teacher-mode {
+      --accent-color: #10b981; /* Green for Teacher */
+      --accent-hover: #059669;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg-gradient);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: var(--text-main);
+      padding: 1rem;
+    }
+
+    .login-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Role Toggle Slider */
+    .role-toggle-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 1.75rem;
+      background: var(--input-bg);
+      padding: 6px;
+      border-radius: 30px;
+      border: 1px solid var(--input-border);
+    }
+
+    .role-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: color 0.3s ease;
+    }
+
+    .role-label.active {
+      color: var(--text-main);
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #3b82f6;
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #10b981;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    /* Form Inputs */
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .required {
+      color: #ef4444;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background-color: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: var(--accent-color);
+    }
+
+    .forgot-link {
+      position: absolute;
+      right: 0;
+      top: -1.4rem;
+      font-size: 0.8rem;
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .checkbox-group input {
+      accent-color: var(--accent-color);
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: var(--accent-color);
+      color: var(--button-text);
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin: 1.5rem 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .divider span {
+      padding: 0 0.75rem;
+    }
+
+    .btn-secondary {
+      width: 100%;
+      padding: 0.65rem;
+      background-color: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: background-color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-text {
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <div class="card-header">
+      <h1>Sign in</h1>
+      <p id="subtitle">Welcome back. Access your student dashboard.</p>
+    </div>
+
+    <!-- Role Toggle Slider -->
+    <div class="role-toggle-container">
+      <span class="role-label active" id="label-student">Student</span>
+      <label class="switch">
+        <input type="checkbox" id="roleSlider" onchange="toggleRole()">
+        <span class="slider"></span>
+      </label>
+      <span class="role-label" id="label-teacher">Teacher</span>
+    </div>
+
+    <form onsubmit="event.preventDefault();">
+      <div class="form-group">
+        <label for="username">Email or username <span class="required">*</span></label>
+        <input type="text" id="username" value="0772621456" required />
+      </div>
+
+      <div class="form-group" style="position: relative;">
+        <label for="password">Password <span class="required">*</span></label>
+        <a href="#" class="forgot-link">Forgot password?</a>
+        <div class="input-wrapper">
+          <input type="password" id="password" value="••••••••" required />
+          <button type="button" class="toggle-password" title="Toggle password visibility">👁</button>
+        </div>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="remember" />
+        <label for="remember">Keep me signed in</label>
+      </div>
+
+      <button type="submit" class="btn-primary">Sign in</button>
+    </form>
+
+    <div class="divider">
+      <span>or</span>
+    </div>
+
+    <button type="button" class="btn-secondary">
+      <span>🔑</span> Continue with passkey
+    </button>
+    <button type="button" class="btn-secondary">
+      <span>✉</span> Continue with magic link
+    </button>
+  </div>
+
+  <div class="footer-text">
+    © 2023–2026 CENTIPID TECHNOLOGIES
+  </div>
+
+  <script>
+    function toggleRole() {
+      const isTeacher = document.getElementById('roleSlider').checked;
+      const body = document.body;
+      const subtitle = document.getElementById('subtitle');
+      const labelStudent = document.getElementById('label-student');
+      const labelTeacher = document.getElementById('label-teacher');
+
+      if (isTeacher) {
+        body.classList.add('teacher-mode');
+        subtitle.textContent = "Welcome back. Access your teacher console.";
+        labelTeacher.classList.add('active');
+        labelStudent.classList.remove('active');
+      } else {
+        body.classList.remove('teacher-mode');
+        subtitle.textContent = "Welcome back. Access your student dashboard.";
+        labelStudent.classList.add('active');
+        labelTeacher.classList.remove('active');
+      }
+    }
+  </script>
+</body>
+</html>
+
+```
